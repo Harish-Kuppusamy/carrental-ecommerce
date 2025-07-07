@@ -15,7 +15,12 @@ const PORT = 8080;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 app.use(express.json());
 
 // Database Connection
