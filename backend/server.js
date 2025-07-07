@@ -15,9 +15,11 @@ const PORT = process.env.PORT || 8080;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middlewares
+const allowedOrigins = ["https://carrental-ecommerce.vercel.app"];
 app.use(
   cors({
-    origin: "*",
+    origin: allowedOrigins,
+    credentials: true,
   })
 );
 
