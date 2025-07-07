@@ -32,7 +32,7 @@ const Signup = () => {
         email: user.email,
         password: user.uid, 
       });
-
+        localStorage.setItem("token", token);
       alert("Signup Successful : )");
       navigate("/home"); 
     } catch (err) {
