@@ -27,12 +27,14 @@ const Signup = () => {
       const user = res.user;
       console.log(user);
 
-     const res = await axios.post(`${BASE_URL}/api/auth/register`, {
+     const registerRes = await axios.post(`${BASE_URL}/api/auth/register`, {
         name: user.displayName,
         email: user.email,
         password: user.uid, 
       });
-        const {token} = res.data;
+        
+    const { token, user: userData } = registerRes.data;
+    const role = userData.role;
         localStorage.setItem("token", token);
         localStorage.setItem("role",role);
       alert("Signup Successful : )");
