@@ -4,6 +4,8 @@ import axios from "axios";
 /**
  * Owner's AddCar page to add new cars to the platform
  */
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const AddCar = () => {
   // Form state to hold car details
   const [carData, setCarData] = useState({
@@ -32,7 +34,7 @@ const AddCar = () => {
     e.preventDefault(); // Prevent page reload
     try {
       // Send POST request to backend with car details + owner ID
-      await axios.post("http://localhost:8080/api/cars", {
+      await axios.post(`${BASE_URL}/api/cars`, {
         ...carData,
         owner: ownerId,
       });

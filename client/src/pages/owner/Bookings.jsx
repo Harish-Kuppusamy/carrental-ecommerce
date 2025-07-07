@@ -5,12 +5,14 @@ import axios from "axios";
  * Owner-side Booking management page
  * Displays all bookings and allows owner to confirm them
  */
+
+const BASE_URL = import.meta.env.VITE_API_URL;
 const Bookings = () => {
   const [bookings, setBookings] = useState([]); // Store all bookings fetched from backend
 
   // Function to fetch all bookings from server
   const fetchBookings = async () => {
-    const res = await axios.get("http://localhost:8080/api/bookings");
+    const res = await axios.get(`${BASE_URL}/api/bookings`);
     console.log(res.data); // Debug: Check API response
     setBookings(res.data); // Save bookings to state
   };
@@ -24,7 +26,7 @@ const Bookings = () => {
   const handleStatusUpdate = async (id, status) => {
     try {
       // Send PUT request to update status in backend
-      await axios.put(`http://localhost:8080/api/bookings/${id}`, { status });
+      await axios.put(`${BASE_URL}/api/bookings/${id}`, { status });
       fetchBookings(); // Refresh bookings after status change
     } catch (err) {
       console.error(err);

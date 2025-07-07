@@ -14,10 +14,11 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
+  const BASE_URL = import.meta.env.VITE_API_URL;
   /**
    * Google Signup using Firebase + Register on your backend
    */
+
   const handleGoogleSignup = async (e) => {
     e.preventDefault();
 
@@ -26,7 +27,7 @@ const Signup = () => {
       const user = res.user;
       console.log(user);
 
-      await axios.post("http://localhost:8080/api/auth/register", {
+      await axios.post(`${BASE_URL}/api/auth/register`, {
         name: user.displayName,
         email: user.email,
         password: user.uid, 
@@ -47,7 +48,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/register", {
+      const res = await axios.post(`${BASE_URL}/api/auth/register`, {
         name,
         email,
         password,

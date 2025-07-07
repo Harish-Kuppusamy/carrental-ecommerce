@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState(""); // Email state
   const [password, setPassword] = useState(""); // Password state
-
+  const BASE_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   /**
@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/login", {
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, {
         email,
         password,
       });

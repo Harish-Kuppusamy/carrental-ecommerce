@@ -12,6 +12,7 @@ const Cars = () => {
   const [input, setInput] = useState(""); // Search input state
   const [cars, setCars] = useState([]); // List of all cars
   const [loading, setLoading] = useState(true); // Loader state
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   /**
    * Fetch all cars from API on component mount
@@ -20,7 +21,7 @@ const Cars = () => {
     setLoading(true);
 
     axios
-      .get("http://localhost:8080/api/cars")
+      .get(`${BASE_URL}/api/cars`)
       .then((res) => {
         console.log(res.data);
         setCars(res.data); // Store cars in state

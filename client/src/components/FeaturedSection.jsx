@@ -11,11 +11,12 @@ import axios from "axios";
 const FeaturedSection = () => {
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     // Fetch cars from backend when component mounts
     axios
-      .get("http://localhost:8080/api/cars")
+      .get(`${BASE_URL}/api/cars`)
       .then((res) => {
         console.log(res.data); 
         setCars(res.data); 

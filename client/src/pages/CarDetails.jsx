@@ -7,6 +7,8 @@ import Loader from "../components/Loader";
 /**
  * CarDetails page - shows detailed information for a selected car and booking form
  */
+
+const BASE_URL = import.meta.env.VITE_API_URL;
 const CarDetails = () => {
   const { id } = useParams(); // Get car ID from URL
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const CarDetails = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:8080/api/bookings",
+        `${BASE_URL}/api/bookings`,
         newBooking
       );
       console.log(res.data);
@@ -54,7 +56,7 @@ const CarDetails = () => {
    */
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/cars")
+      .get(`${BASE_URL}/api/cars`)
       .then((res) => {
         const cardata = res.data;
         setCar(cardata.find((c) => c._id === id)); // Find car matching the ID

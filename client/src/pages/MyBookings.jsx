@@ -13,6 +13,7 @@ const MyBookings = () => {
 
   const currency = import.meta.env.VITE_CURRENCY;
   const userId = localStorage.getItem("userId");
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   /**
    * Fetch all bookings and filter for current user
@@ -20,7 +21,7 @@ const MyBookings = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:8080/api/bookings")
+      .get(`${BASE_URL}/api/bookings`)
       .then((res) => {
         const allBookings = res.data;
         const myBookings = allBookings.filter(
@@ -49,7 +50,7 @@ const MyBookings = () => {
   const handleBuyNow = async (booking) => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/payment/create-order",
+        `${BASE_URL}/api/payment/create-order`,
         { amount: booking.price }
       );
 
@@ -66,7 +67,7 @@ const MyBookings = () => {
           );
           
 
-          axios.put(`http://localhost:8080/api/bookings/${booking._id}/update-status`, {
+          axios.put(`${BASE_URL}/api/bookings/${booking._id}/update-status`, {
             status: "paid",
           });
 
@@ -104,7 +105,7 @@ console.log(bookings)
       );
       if (!confirmDelete) return;
 
-      await axios.delete(`http://localhost:8080/api/bookings/${id}`);
+      await axios.delete(`${BASE_URL}/api/bookings/${id}`);
       alert("Booking Cancelled");
 
       // Remove cancelled booking from UI
