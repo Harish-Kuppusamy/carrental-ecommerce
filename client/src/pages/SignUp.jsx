@@ -27,12 +27,14 @@ const Signup = () => {
       const user = res.user;
       console.log(user);
 
-      await axios.post(`${BASE_URL}/api/auth/register`, {
+     const res = await axios.post(`${BASE_URL}/api/auth/register`, {
         name: user.displayName,
         email: user.email,
         password: user.uid, 
       });
+        const {token} = res.data;
         localStorage.setItem("token", token);
+        localStorage.setItem("role",role);
       alert("Signup Successful : )");
       navigate("/home"); 
     } catch (err) {
