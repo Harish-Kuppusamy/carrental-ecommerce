@@ -33,8 +33,8 @@ const Signup = () => {
         password: user.uid, 
       });
 
-      alert("Signup Successful, Please Login");
-      navigate("/login"); 
+      alert("Signup Successful : )");
+      navigate("/home"); 
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || "Something went wrong");
