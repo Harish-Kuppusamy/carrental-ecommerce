@@ -75,7 +75,7 @@ const handleSubmit = (e) => {
           </div>
 
           {/* Search Button */}
-          <button className="flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer">
+          <button className="flex items-center justify-center gap-1 px-9 py-3 max-sm:mt-4 bg-primary hover:bg-primary-dull text-white rounded-full cursor-pointer" type="submit">
             <img
               src={assets.search_icon}
               alt="Search"
