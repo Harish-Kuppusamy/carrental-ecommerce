@@ -8,11 +8,12 @@ const Hero = () => {
   // State to store selected pickup location
   const [pickupLocation, setPickupLocation] = useState("");
 
-  const handlesubmit = (e) => {
-    e.preventDefault();
-    console.log("Searching with", pickupLocation);
-    alert(`Currently Car Is Not Available For ${pickupLocation}`)
-  }
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log("Searching with", pickupLocation);
+  alert(`Currently Car Is Not Available For ${pickupLocation}`);
+};
+
 
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-14 bg-light text-center">
