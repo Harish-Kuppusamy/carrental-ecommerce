@@ -11,7 +11,7 @@ const Hero = () => {
   const handlesubmit = (e) => {
     e.preventDefault();
     console.log("Searching with", pickupLocation);
-    alert(`Currently Car Is Not Available For ${pickupLocation}`}
+    alert(`Currently Car Is Not Available For ${pickupLocation}`)
   }
 
   return (
