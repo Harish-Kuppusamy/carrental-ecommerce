@@ -11,12 +11,15 @@ const Hero = () => {
 const handleSubmit = (e) => {
   e.preventDefault();
   console.log("Searching with", pickupLocation);
-  Swal.fire({
-    title: "Sorry!",
-    text: `Currently, cars are not available for ${pickupLocation}.`,
-    icon: "warning",
-    confirmButtonText: "Okay",
-  });
+Swal.fire({
+  title: "Sorry!",
+  text: `Currently, cars are not available for ${pickupLocation}.`,
+  icon: "warning",
+  confirmButtonText: "Okay",
+}).then(() => {
+  console.log("SweetAlert closed ✅");
+});
+
 };
 
 
