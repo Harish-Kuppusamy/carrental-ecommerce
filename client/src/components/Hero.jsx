@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { assets, cityList } from "../assets/assets";
-
+import Swal from "sweetalert2";
 /**
  * Hero section with main heading and car search form
  */
@@ -11,7 +11,12 @@ const Hero = () => {
 const handleSubmit = (e) => {
   e.preventDefault();
   console.log("Searching with", pickupLocation);
-  alert(`Currently Car Is Not Available For ${pickupLocation}`);
+  Swal.fire({
+    title: "Sorry!",
+    text: `Currently, cars are not available for ${pickupLocation}.`,
+    icon: "warning",
+    confirmButtonText: "Okay",
+  });
 };
 
 
@@ -23,7 +28,7 @@ const handleSubmit = (e) => {
       </h1>
 
       {/* Search Form Container */}
-      <form onSubmit={handlesubmit} className="flex flex-col md:flex-row items-center justify-between p-6 rounded-lg md:rounded-full w-full max-w-80 md:max-w-200 bg-white shadow-[0px_8px_20px_rgba(0,0,0,0.1)]">
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between p-6 rounded-lg md:rounded-full w-full max-w-80 md:max-w-200 bg-white shadow-[0px_8px_20px_rgba(0,0,0,0.1)]">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-10 min-md:ml-8">
           {/* Pickup Location Dropdown */}
           <div className="flex flex-col items-start gap-2">
