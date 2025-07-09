@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  role: { type: String, default: "user" },
+  role: { type: String, default: "admin" },
 });
 
 const User = mongoose.model("user", userSchema);
@@ -44,7 +44,7 @@ const User = mongoose.model("user", userSchema);
 // Auth Routes
 app.post("/api/auth/register", async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser)
@@ -56,7 +56,6 @@ app.post("/api/auth/register", async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role:role || "user"
     });
 
     const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
