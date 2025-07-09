@@ -28,7 +28,11 @@ app.use(express.json());
 // Database Connection
 mongoose
   .connect(process.env.MONGO_URL)
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(() => {
+    console.log("✅ MongoDB Connected")
+    createDefaultOwner();
+  }
+       )
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // User Schema & Model
@@ -40,6 +44,26 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("user", userSchema);
+
+
+
+// owner credentials
+
+const createDefaultOwner = async () => {
+  const existing = await User.findOne({ email: "owner@carrental.com" });
+  if (!existing) {
+    const hashed = await bcrypt.hash("owner123", 10);
+    await User.create({
+      name: "Default Owner",
+      email: "owner@carrental.com",
+      password: hashed,
+      role: "owner",
+    });
+    console.log("✅ Default owner created.");
+  }
+};
+
+
 
 // Auth Routes
 app.post("/api/auth/register", async (req, res) => {
