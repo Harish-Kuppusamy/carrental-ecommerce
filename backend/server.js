@@ -26,19 +26,8 @@ app.use(
 app.use(express.json());
 
 
-// User Schema & Model
-const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
-  role: { type: String, default: "user" },
-});
 
-const User = mongoose.model("user", userSchema);
-
-
-
-// owner credentials
+/* owner credentials
 
 const createDefaultOwner = async () => {
   const existing = await User.findOne({ email: "owner@carrental.com" });
@@ -52,7 +41,7 @@ const createDefaultOwner = async () => {
     });
     console.log("✅ Default owner created.");
   }
-};
+};*/
 
 
 
@@ -63,6 +52,20 @@ mongoose
     console.log("✅ MongoDB Connected")
     createDefaultOwner();
   }).catch((err) => console.error("❌ MongoDB Connection Error:", err));
+
+
+// User Schema & Model
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
+  role: { type: String, default: "user" },
+});
+
+const User = mongoose.model("user", userSchema);
+
+
+
 
 
 
