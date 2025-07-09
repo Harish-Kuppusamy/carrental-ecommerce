@@ -57,6 +57,10 @@ const Signup = () => {
         email,
         password,
       });
+      const { token, user: userData } = res.data;
+    const role = userData.role;
+        localStorage.setItem("token", token);
+        localStorage.setItem("role",role);
 
       alert(res.data.message);
       navigate("/login");
