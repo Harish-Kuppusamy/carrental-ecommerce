@@ -25,15 +25,6 @@ app.use(
 
 app.use(express.json());
 
-// Database Connection
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    console.log("✅ MongoDB Connected")
-    createDefaultOwner();
-  }
-       )
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // User Schema & Model
 const userSchema = new mongoose.Schema({
@@ -62,6 +53,18 @@ const createDefaultOwner = async () => {
     console.log("✅ Default owner created.");
   }
 };
+
+
+
+// Database Connection
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("✅ MongoDB Connected")
+    createDefaultOwner();
+  }).catch((err) => console.error("❌ MongoDB Connection Error:", err));
+
+
 
 
 
