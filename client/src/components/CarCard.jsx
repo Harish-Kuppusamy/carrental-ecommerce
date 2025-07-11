@@ -5,7 +5,7 @@ import { assets } from "../assets/assets";
  * CarCard component to display individual car details with price and specifications
  * @param {Object} car - Car object with details like image, brand, price, etc.
  */
-const CarCard = ({ car }) => {
+const CarCard = ({ car}) => {
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const CarCard = ({ car }) => {
         navigate(`/car-details/${car._id}`);
         scrollTo(0, 0);
       }}
+      
     >
       {/* Car Image with Price Tag and Availability Badge */}
       <div className="relative h-48 overflow-hidden">

@@ -21,27 +21,41 @@ const Signup = () => {
 
   const handleGoogleSignup = async (e) => {
     e.preventDefault();
+    let user = null;
 
     try {
       const res = await signInWithPopup(auth, googleProvider);
-      const user = res.user;
+      user = res.user;
       console.log(user);
 
-     const registerRes = await axios.post(`${BASE_URL}/api/auth/register`, {
+      const registerRes = await axios.post(`${BASE_URL}/api/auth/register`, {
         name: user.displayName,
         email: user.email,
-        password: user.uid, 
+        password: user.uid,
       });
-        
-    const { token, user: userData } = registerRes.data;
-    const role = userData.role;
-        localStorage.setItem("token", token);
-        localStorage.setItem("role",role);
+
+      const { token, user: userData } = registerRes.data;
+      const role = userData.role;
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
       alert("Signup Successful : )");
-      navigate("/home"); 
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Something went wrong");
+      navigate("/home");
+    } catch (registerErr) {
+      if (registerErr.response?.data?.message === "User already exists") {
+        const loginRes = await axios.post(`${BASE_URL}/api/auth/login`, {
+          email: user.email,
+          password: user.uid,
+        });
+
+        const { token, user: userData } = loginRes.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", userData.role);
+        alert("Welcome back!");
+        navigate("/home");
+      } else {
+        console.error(registerErr);
+        alert(registerErr.response?.data?.message || "Something went wrong");
+      }
     }
   };
 
@@ -57,7 +71,6 @@ const Signup = () => {
         email,
         password,
       });
-      
 
       alert(res.data.message);
       navigate("/login");

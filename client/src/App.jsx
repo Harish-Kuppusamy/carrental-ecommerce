@@ -36,6 +36,7 @@ function App() {
   return (
     <>
       {/* Hide Navbar/Footer on Owner Pages or Auth Pages */}
+
       {!isOwnerPath && !isAuthPage && <Navbar />}
 
       <Routes>

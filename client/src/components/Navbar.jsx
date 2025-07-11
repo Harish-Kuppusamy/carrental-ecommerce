@@ -3,6 +3,7 @@ import { assets, menuLinks } from "../assets/assets";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useSearch } from "../context/SearchContext";
 
 /**
  * Navbar component with responsive menu and authentication handling
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   const [open, setOpen] = useState(false); // Mobile menu open/close state
   const [firebaseUser, setFirebaseUser] = useState(null); // Store logged-in Firebase user if available
+  const { search, setSearch } = useSearch();
 
   const token = localStorage.getItem("token"); // Local token for normal user (non-Firebase)
 
@@ -68,8 +70,21 @@ const Navbar = () => {
             type="text"
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             placeholder="Search Products"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                const element = document.getElementById("featured");
+
+                if (element) {
+                  element.scrollIntoView({behavior:"smooth"})
+                }
+              }
+               
+            }}
           />
           <img src={assets.search_icon} alt="Search" />
+          {console.log(search)}
         </div>
 
         {/* Login/Logout Button */}

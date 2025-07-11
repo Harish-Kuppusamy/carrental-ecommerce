@@ -49,10 +49,9 @@ const MyBookings = () => {
    */
   const handleBuyNow = async (booking) => {
     try {
-      const res = await axios.post(
-        `${BASE_URL}/api/payment/create-order`,
-        { amount: booking.price }
-      );
+      const res = await axios.post(`${BASE_URL}/api/payment/create-order`, {
+        amount: booking.price,
+      });
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -65,7 +64,6 @@ const MyBookings = () => {
           alert(
             "Payment Successful! Payment ID: " + response.razorpay_payment_id
           );
-          
 
           axios.put(`${BASE_URL}/api/bookings/${booking._id}/update-status`, {
             status: "paid",
@@ -77,8 +75,7 @@ const MyBookings = () => {
               b._id === booking._id ? { ...b, status: "paid" } : b
             )
           );
-console.log(bookings)
-
+          console.log(bookings);
         },
         prefill: {
           name: localStorage.getItem("name"),

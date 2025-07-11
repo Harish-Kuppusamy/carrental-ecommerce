@@ -15,11 +15,11 @@ const PORT = process.env.PORT || 8080;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middlewares
-const allowedOrigins = ["https://carrental-ecommerce.vercel.app"];
+ const allowedOrigins = ["https://carrental-ecommerce.vercel.app"];
 app.use(
   cors({
     origin: allowedOrigins,
-    credentials: true,
+    credentials:"true",
   })
 );
 
@@ -27,21 +27,21 @@ app.use(express.json());
 
 
 
-/* owner credentials
+// //owner credentials
 
-const createDefaultOwner = async () => {
-  const existing = await User.findOne({ email: "owner@carrental.com" });
-  if (!existing) {
-    const hashed = await bcrypt.hash("owner123", 10);
-    await User.create({
-      name: "Default Owner",
-      email: "owner@carrental.com",
-      password: hashed,
-      role: "owner",
-    });
-    console.log("✅ Default owner created.");
-  }
-};*/
+// const createDefaultOwner = async () => {
+//   const existing = await User.findOne({ email: "owner@carrental.com" });
+//   if (!existing) {
+//     const hashed = await bcrypt.hash("owner123", 10);
+//     await User.create({
+//       name: "Default Owner",
+//       email: "owner@carrental.com",
+//       password: hashed,
+//       role: "owner",
+//     });
+//     console.log("✅ Default owner created.");
+//   }
+// };
 
 
 
@@ -50,7 +50,7 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("✅ MongoDB Connected")
-    createDefaultOwner();
+    // createDefaultOwner();
   }).catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 
@@ -234,6 +234,10 @@ app.delete("/api/bookings/:id", async (req, res) => {
 
 // Payment Routes
 app.use("/api/payment", paymentRoutes);
+
+
+
+
 
 // Start Server
 app.listen(PORT, () => {
