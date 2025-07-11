@@ -41,21 +41,8 @@ const Signup = () => {
       alert("Signup Successful : )");
       navigate("/home");
     } catch (registerErr) {
-      if (registerErr.response?.data?.message === "User already exists") {
-        const loginRes = await axios.post(`${BASE_URL}/api/auth/login`, {
-          email: user.email,
-          password: user.uid,
-        });
-
-        const { token, user: userData } = loginRes.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("role", userData.role);
-        alert("Welcome back!");
-        navigate("/home");
-      } else {
-        console.error(registerErr);
-        alert(registerErr.response?.data?.message || "Something went wrong");
-      }
+      console.log(registerErr)
+      alert(registerErr.response?.data?.message)
     }
   };
 
